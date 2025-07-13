@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Video Summarizer | LearnAI{% endblock %}
+
+{% block content %}
+  <h2>Summarize a YouTube Video 🎥</h2>
+
+  <form method="POST">
+    <input type="url" name="youtube_url" placeholder="Enter YouTube video link..." required>
+    <button type="submit">Summarize</button>
+  </form>
+
+  {% if video_title %}
+    <h3 style="margin-top: 2rem;">{{ video_title }}</h3>
+  {% endif %}
+
+  {% if transcript_info %}
+    <p style="font-style: italic; color: #666;">{{ transcript_info }}</p>
+  {% endif %}
+
+  {% if summary %}
+    <div class="bubble assistant" style="background: #fff8fc;">
+      <strong>Summary:</strong>
+      <p>{{ summary }}</p>
+    </div>
+  {% endif %}
+{% endblock %}

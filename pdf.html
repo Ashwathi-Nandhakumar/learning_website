@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Summarize PDF | LearnAI{% endblock %}
+{% block content %}
+  <div class="form-box">
+    <h2>Summarize a PDF 📄</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="pdf_file" accept=".pdf" required />
+      <button class="neon-btn" type="submit">Summarize</button>
+    </form>
+  </div>
+
+  {% if summary %}
+    <div class="chat-message bot-message">
+      <strong>Summary:</strong><br>
+      {{ summary }}
+    </div>
+  {% endif %}
+{% endblock %}

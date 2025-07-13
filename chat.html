@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Chat | LearnAI{% endblock %}
+
+{% block content %}
+  <h2>Your Learning Assistant 💬</h2>
+
+  <div id="chatbox">
+    {% for msg in chat %}
+      <div class="bubble user"><strong>You:</strong> {{ msg.prompt }}</div>
+      <div class="bubble assistant"><strong>AI:</strong> {{ msg.reply }}</div>
+    {% endfor %}
+  </div>
+  <div class="chat-buttons">
+  <form method="POST">
+    <textarea name="prompt" placeholder="Ask your question here..." required rows="4" required columns ='12'class="chat-input"></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <form action="{{ url_for('clear_chat') }}" method="GET">
+    <button type="submit">Clear Chat</button>
+  </form>
+</div>
+
+  
+  
+{% endblock %}
