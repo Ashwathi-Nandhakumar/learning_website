@@ -10,6 +10,7 @@ from langchain.schema import Document
 import sqlite3
 import os
 import json
+import secrets
 import PyPDF2
 from io import BytesIO
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -19,7 +20,11 @@ from urllib.parse import urlparse, parse_qs
 load_dotenv()
 
 groq_api_key = os.getenv("GROQ_API_KEY")
-secret_key = os.getenv("SECRET_KEY", "supersecretkey")
+# Falls back to a freshly generated random key (instead of a hard-coded string) if
+# SECRET_KEY isn't set, so a missing env var never leaves a predictable, publicly
+# visible key signing sessions. Set SECRET_KEY in .env for sessions that persist
+# across restarts.
+secret_key = os.getenv("SECRET_KEY") or secrets.token_hex(32)
 
 if not groq_api_key:
     raise RuntimeError("Missing GROQ_API_KEY in environment.")
